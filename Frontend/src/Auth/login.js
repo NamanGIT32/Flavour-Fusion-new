@@ -34,7 +34,7 @@ const Login = () => {
     onSuccess: googleResponse,
     onError: googleResponse,
     flow: "auth-code",
-    redirectUri: "https://mern-auth-app-cyhp.vercel.app",
+    redirectUri: "https://flavour-fusion-frontend.vercel.app",
   });
   const navigate = useNavigate();
   const [loginInfo, setLoginInfo] = useState({
@@ -48,7 +48,7 @@ const Login = () => {
       return handleError("email, password is required");
     }
     try {
-      const response = await fetch("http://localhost:8000/auth/login",{
+      const response = await fetch("https://flavour-fusion-new.vercel.app/auth/login",{
         method:"POST",
         headers:{
           'Content-type': 'application/json'
