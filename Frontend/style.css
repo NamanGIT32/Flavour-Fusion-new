@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+    scroll-behavior:smooth;
+}
+
+.shimmer-list{
+    /* border: 1px solid red; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.shimmer-box{
+    border: 1px solid black;
+    border-radius:12px;
+    height: 200px;
+    width: 240px;
+    background-color: rgb(186, 165, 165);
+    opacity: 0.1;
+    gap: 10px;
+    margin: 20px;
+}
+@keyframes Flash{
+    0%{
+        transform: scale(1.05);
+    }
+    50%{
+        transform: scale(1);
+    }
+    100%{
+        transform: scale(1.05);
+    }
+}
+
+@keyframes slide{
+    0%{
+        transform:translateX(0%);
+    }
+    15%{
+        transform:translateX(0%);
+    }
+    20%{
+        transform:translateX(-100%);
+    }
+    35%{
+        transform:translateX(-100%);
+    }
+    40%{
+        transform:translateX(-200%);
+    }
+    55%{
+        transform:translateX(-200%);
+    }
+    60%{
+        transform:translateX(-100%);
+    }
+    75%{
+        transform:translateX(-100%);
+        
+    }
+    80%{
+        transform:translateX(0%);
+    }
+    100%{
+        transform:translateX(0%);
+    }
+}
+*{
+    padding: 0;
+    margin:0;
+    box-sizing: border-box;
+}
+.outer-container{
+    height: 80vh;
+    width: 100%;
+    overflow-x: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+
+.container{
+    width: 400px;
+    background: #fff;
+    border: 1px solid slategrey;
+    padding: 40px 40px;
+    border-radius: 10px;
+    box-shadow: 8px 8px 24px 0px rgba(66,68,90,1);
+}
+.container h1{
+    text-align: center;
+    margin-bottom: 20px;
+}
+.container div{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 20px;
+}
+label{
+    font-size: 20px;
+    font-weight: 500;
+}
+input{
+    border:none;
+    outline: none;
+    border-bottom: 2px solid black;
+    font-size: 18px;
+    padding: 5px 2px;
+}
+input::placeholder{
+    font-style: italic;
+}
+button{
+    background-color: #fff;
+    border: 1px solid rgb(17, 98, 99);
+    padding: 5px 10px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 6px;
+}
+.container span{
+    font-size: 16px;
+    margin-left: 10px;
+}
+.google{
+    margin-top: 15px;
+}
