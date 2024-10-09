@@ -9,8 +9,8 @@ const Login = () => {
     try {
       if (authResult.code) {
         const result = await googleAuth(authResult["code"]);
+        console.log(result)
         const data = result.data;
-        console.log(data);
         if (result.data.success === false) {
           handleError(result.data.message);
         } else {
@@ -111,7 +111,7 @@ const Login = () => {
       </form>
       <div className="google">
         <button type="submit" onClick={googleLogin}>
-          Signup with google
+          Login with google
         </button>
       </div>
       <ToastContainer />

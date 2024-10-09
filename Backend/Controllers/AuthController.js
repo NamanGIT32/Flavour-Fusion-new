@@ -53,6 +53,7 @@ const login = async (req, res) => {
 const googleLogin = async (req, res) => {
   try {
     const { code } = req.query;
+    console.log(code)
     // Exchange the authorization code for tokens (access_token, id_token, etc.)
     const googleRes = await oauth2Client.getToken(code);
     oauth2Client.setCredentials(googleRes.tokens); // Set the tokens to the client
