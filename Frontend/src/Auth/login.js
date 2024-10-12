@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { googleAuth, handleError, handleSuccess } from "../utils/utils";
 import { ToastContainer } from "react-toastify";
 import { useGoogleLogin } from "@react-oauth/google";
+import api from "../../axios";
 
 const Login = () => {
   const googleResponse = async (authResult) => {
@@ -48,14 +49,8 @@ const Login = () => {
       return handleError("email, password is required");
     }
     try {
-      const response = await fetch("https://flavour-fusion-new.vercel.app/auth/login",{
-        method:"POST",
-        headers:{
-          'Content-type': 'application/json'
-        },
-        body: JSON.stringify(loginInfo),
-      });
-      const result = await response.json();
+      const response = await api.post("/auth/login", loginInfo); // Using the Axios instance
+      const result = response.data; // Axios automatically parses JSON
       console.log(result);
       const { success, message, error, jwtToken, name, email } = result;
       if (success) {

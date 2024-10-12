@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { handleError, handleSuccess } from "../utils/utils";
 import { ToastContainer } from "react-toastify";
+import api from "../../axios";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -17,14 +18,8 @@ const Signup = () => {
       return handleError("name, email, password is required");
     }
     try {
-      const response = await fetch("https://flavour-fusion-new.vercel.app/auth/signup",{
-        method:"POST",
-        headers:{
-          'Content-type': 'application/json'
-        },
-        body:JSON.stringify(signupInfo)
-      })
-      const result= await response.json();
+      const response = await api.post("/auth/signup", signupInfo); // Using the Axios instance
+      const result = response.data; // Axios automatically parses JSON
       console.log(result)
       const {success, message, error} = result;
       if(success){

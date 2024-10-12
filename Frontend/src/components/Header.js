@@ -18,7 +18,7 @@ export const Header = () => {
   const isOnline = useOnline();
   const navigate = useNavigate();
   const CartItems = useSelector((store) => store.cart.items); //used to subscribe to the Store.
-  console.log(CartItems);
+  // console.log(CartItems);
   const handleLogout = () => {
     localStorage.clear();
     navigate("/login");
