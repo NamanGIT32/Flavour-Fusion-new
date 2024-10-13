@@ -4,6 +4,7 @@
 
 *{
     scroll-behavior:smooth;
+    font-family: sans-serif;
 }
 
 .shimmer-list{
@@ -84,7 +85,7 @@
 
 
 .container{
-    width: 400px;
+    width: 420px;
     background: #fff;
     border: 1px solid slategrey;
     padding: 40px 40px;

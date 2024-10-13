@@ -56,7 +56,7 @@ const Signup = () => {
           <label htmlFor="password">Password</label>
           <input type="password" placeholder="enter your password" value={signupInfo.password} onChange={(e)=> setSignupInfo({...signupInfo, password:e.target.value})}/>
         </div>
-        <button type="submit">Sign Up</button>
+        <button type="submit" className="py-1 px-3 ">Sign Up</button>
         <span>
           already have an account? <Link to="/login">Login</Link>{" "}
         </span>

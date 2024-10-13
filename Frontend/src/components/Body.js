@@ -39,10 +39,10 @@ const Body= () => {
                     <img className="h-full min-w-[100%]" style={{animation:'slide 20s linear infinite'}} src="https://images.unsplash.com/photo-1550389636-ad25afa7ab44?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
                 </div>
             </div>
-            <div className="mt-2 mb-5 flex justify-center gap-2">
+            <div className="mt-2 mb-5 flex items-center justify-center gap-3 ">
                 <input
                     type="text"
-                    className="border-[2px] border-l-4 border-r-4 border-neutral-500 rounded-full w-2/5 p-1 text-sm h-10 font-serif focus: outline-none"
+                    className="border border-l-4 border-r-4 border-slate-400 rounded-xl w-2/5 p-1 px-3 text-base h-10 font-serif focus: outline-none mt-10 mb-5"
                     placeholder="ex: The Filter Coffee"
                     value={searchText}
                     onChange={(e)=>{
@@ -55,7 +55,7 @@ const Body= () => {
                 }}>Search</button>
             </div>   
             
-            <div className="flex flex-wrap gap-10 justify-center mx-2">
+            <div className="flex flex-wrap gap-10 justify-center mx-2 mb-20">
                 {
                     (filteredRestaurants.length===0)? <h1>No restaurants found...!!</h1> : filteredRestaurants.map((Restaurant)=>{
                         return  <RestaurantCard key={Restaurant.info.id} restaurant={Restaurant} {...Restaurant.info} />

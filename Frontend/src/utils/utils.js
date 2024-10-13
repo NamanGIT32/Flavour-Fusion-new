@@ -2,7 +2,7 @@ import {toast} from "react-toastify";
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL:'https://flavour-fusion-new.vercel.app/auth'
+    baseURL:`${process.env.REACT_APP_API_URL}/auth`,
 });
 
 

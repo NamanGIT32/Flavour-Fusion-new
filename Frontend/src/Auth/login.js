@@ -4,6 +4,7 @@ import { googleAuth, handleError, handleSuccess } from "../utils/utils";
 import { ToastContainer } from "react-toastify";
 import { useGoogleLogin } from "@react-oauth/google";
 import api from "../../axios";
+import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
   const googleResponse = async (authResult) => {
@@ -35,7 +36,7 @@ const Login = () => {
     onSuccess: googleResponse,
     onError: googleResponse,
     flow: "auth-code",
-    redirectUri: "https://flavour-fusion-frontend.vercel.app",
+    redirectUri: process.env.REACT_APP_GOOGLE_REDIRECT_URI,
   });
   const navigate = useNavigate();
   const [loginInfo, setLoginInfo] = useState({
@@ -99,13 +100,14 @@ const Login = () => {
             }
           />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit" className="py-1 px-3 ">Login</button>
         <span>
           don't have an account? <Link to="/signup">Signup</Link>{" "}
         </span>
       </form>
       <div className="google">
-        <button type="submit" onClick={googleLogin}>
+        <button type="submit" className="py-1 text-lg flex items-center justify-center gap-3" onClick={googleLogin}>
+        <FcGoogle className="text-2xl" />
           Login with google
         </button>
       </div>
