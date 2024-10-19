@@ -11,7 +11,7 @@ const Login = () => {
     try {
       if (authResult.code) {
         const result = await googleAuth(authResult["code"]);
-        console.log(result)
+        console.log(result);
         const data = result.data;
         if (result.data.success === false) {
           handleError(result.data.message);
@@ -73,46 +73,50 @@ const Login = () => {
   };
   return (
     <div className="outer-container">
-
-   
-    <div className="container">
-      <h1 className="text-4xl font-bold">Login</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            placeholder="enter your email"
-            value={loginInfo.email}
-            onChange={(e) =>
-              setLoginInfo({ ...loginInfo, email: e.target.value })
-            }
-          />
+      <div className="container">
+        <h1 className="text-4xl font-bold">Login</h1>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              placeholder="enter your email"
+              value={loginInfo.email}
+              onChange={(e) =>
+                setLoginInfo({ ...loginInfo, email: e.target.value })
+              }
+            />
+          </div>
+          <div>
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              placeholder="enter your password"
+              value={loginInfo.password}
+              onChange={(e) =>
+                setLoginInfo({ ...loginInfo, password: e.target.value })
+              }
+            />
+          </div>
+          <button type="submit" className="py-1 px-3 ">
+            Login
+          </button>
+          <span>
+            don't have an account? <Link to="/signup">Signup</Link>{" "}
+          </span>
+        </form>
+        <div className="google">
+          <button
+            type="submit"
+            className="py-1 text-lg flex items-center justify-center gap-3"
+            onClick={googleLogin}
+          >
+            <FcGoogle className="text-2xl" />
+            Login with google
+          </button>
         </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            placeholder="enter your password"
-            value={loginInfo.password}
-            onChange={(e) =>
-              setLoginInfo({ ...loginInfo, password: e.target.value })
-            }
-          />
-        </div>
-        <button type="submit" className="py-1 px-3 ">Login</button>
-        <span>
-          don't have an account? <Link to="/signup">Signup</Link>{" "}
-        </span>
-      </form>
-      <div className="google">
-        <button type="submit" className="py-1 text-lg flex items-center justify-center gap-3" onClick={googleLogin}>
-        <FcGoogle className="text-2xl" />
-          Login with google
-        </button>
+        <ToastContainer />
       </div>
-      <ToastContainer />
-    </div>
     </div>
   );
 };
