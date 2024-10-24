@@ -2,28 +2,83 @@ import { GoTrash } from "react-icons/go";
 import { IMG_CDN_URL } from "../constants";
 import { useDispatch } from "react-redux";
 import { RemoveItem } from "../utils/Redux/CartSlice";
+import api from "../../axios";
 
-const CartItemsCard = ({ name, imageId, defaultPrice,id }) => { 
+const CartItemsCard = ({ name, image, price, _id, description, fetchCart, itemId, quantity }) => {
+  // const dispatch = useDispatch();
+  // const handleRemoveItem = (id) => {
+  //   dispatch(RemoveItem(id));
+  //   console.log(id)
+  // }
+  const token = localStorage.getItem("jwtToken");
+  const RemoveItem = async (_id) => {
+    try {
+      const res = await api.post(
+        "/cart/delete/",
+        {
+          _id: _id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(res.data);
+      fetchCart();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const increaseQuantity = async (itemId) => {
+    try {
+      const res= await api.post('/cart/add',
+      {
+        foodItemId:itemId
+      },
+      {
+        headers:{
+          Authorization:`Bearer ${token}`
+        }
+      }
+    );
+    const data = res.data;
+    console.log(data);
+    // fetchCart();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  const dispatch = useDispatch();
-  const handleRemoveItem = (id) => {
-    dispatch(RemoveItem(id));
-    console.log(id)
-  } 
   return (
-    <div className="w-full flex items-center justify-between gap-3 mt-2 border-[1px] p-1">
-      <img
-        className="h-24 w-24 object-cover rounded-full shadow-md"
-        src={IMG_CDN_URL + imageId}
-      />
-      <div className="flex items-center gap-12">
-        <div className="flex flex-col">
-          <h2 className="text-lg font-bold whitespace-normal">{name}</h2>
-          {defaultPrice?<h3 className="text-right">{"₹" + defaultPrice/100}</h3>:<h3 className="text-right">₹100</h3>}
-          
+    <div className="w-full mt-2 border border-solid border-slate-300 p-1 px-2 rounded-md">
+      <div className="flex items-center justify-between gap-3">
+        <img
+          className="h-24 w-24 object-cover rounded-full shadow-md shrink-0"
+          src={image}
+        />
+        <div className="flex items-center gap-12">
+          <div className="flex flex-col">
+            <h2 className="text-xl font-bold whitespace-normal text-slate-600">
+              {name}
+            </h2>
+            <h3 className="text-right text-lg">{"₹" + price}</h3>
+          </div>
+          <GoTrash
+            className="text-2xl text-red-500"
+            onClick={() => RemoveItem(_id)}
+          />
+          {/* <GoTrash className="text-2xl text-red-500" onClick={()=>handleRemoveItem({_id})}/> */}
         </div>
-        <GoTrash className="text-2xl text-red-500" onClick={()=>handleRemoveItem({id})}/>
       </div>
+      <div className="flex items-center gap-4">
+        <div className="cursor-pointer text-lg"
+        onClick={()=> increaseQuantity(itemId)}
+        >+</div>
+        <div>{quantity}</div>
+        <div className="cursor-pointer text-lg">-</div>
+      </div>
+      <div className="mt-4 text-slate-600 text-lg">{description}</div>
     </div>
   );
 };

@@ -132,3 +132,7 @@ button{
 .google{
     margin-top: 15px;
 }
+
+.scrollbar::-webkit-scrollbar {
+    display: none;
+  }

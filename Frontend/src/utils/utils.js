@@ -22,4 +22,3 @@ export const handleError = (msg) => {
         position:"top-right",
     })
 }
-

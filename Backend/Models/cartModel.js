@@ -17,6 +17,9 @@ const foodItemSchema= new mongoose.Schema({
     },
     image:{
         type:String
+    },
+    quantity:{
+        type:Number,
     }
 },{timestamps:true});
 

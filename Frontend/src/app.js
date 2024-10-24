@@ -26,19 +26,16 @@ const About = lazy(() => import("./components/About"));
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 const AppLayout = () => {
-  const [info, setInfo] = useState({
-    name: "naman",
-    phone: "7879651164",
-  });
   return (
     <>
       <ChakraProvider>
         <Provider store={Store}>
-          <UsersContext.Provider value={{ user: info }}>
+          
             <Header />
+            <div className="mt-[150px] ">
             <Outlet></Outlet>
+            </div>
             <Footer />
-          </UsersContext.Provider>
         </Provider>
       </ChakraProvider>
     </>
