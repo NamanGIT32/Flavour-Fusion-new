@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import CartItemsCard from "./CartItemsCard";
-// import cartImg from "../assets/img/emptyCart.wepg";
+import cartImg from "../assets/img/emptyCart.webp";
 import { Button } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { FcMoneyTransfer } from "react-icons/fc";
@@ -56,7 +56,7 @@ const Cart = () => {
     <>
       {cartItems.length === 0 ? (
         <div className="h-[100vh] w-[100%] flex flex-col justify-center items-center overflow-hidden overflow-y-hidden">
-          {/* <img src={cartImg} className="h-64"/> */}
+          <img src={cartImg} className="h-64"/>
           <h1 className="font-semibold text-xl text-gray-700 my-3 tracking-wide">
             Your cart is empty
           </h1>

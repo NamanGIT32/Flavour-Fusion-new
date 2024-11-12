@@ -30,7 +30,6 @@ const AppLayout = () => {
     <>
       <ChakraProvider>
         <Provider store={Store}>
-          
             <Header />
             <div className="mt-[150px] ">
             <Outlet></Outlet>
