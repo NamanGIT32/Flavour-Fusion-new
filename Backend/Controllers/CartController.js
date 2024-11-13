@@ -27,7 +27,6 @@ const addToCart = async (req, res) => {
       if (itemIndex > -1) {
         //item already in cart
         cart.items[itemIndex].quantity += 1;
-        return res.status(200).json({ message: "Item Quantity increased", cart });
       } else {
         // add the food item
         cart.items.push({
@@ -79,6 +78,26 @@ const deleteCartItem = async (req, res) => {
   }
 };
 
+const decreaseQuantity = async (req, res) => {
+  const userId = req.user._id;
+  const { _id } = req.body;
+  try {
+    const cart = await Cart.findOne({ userId });
+    const item = cart.items.find((item) => item.itemId.toString() === _id);
+    if (item.quantity > 1) {
+      item.quantity -= 1;
+    } else {
+      cart.items = cart.items.filter((item) => item.itemId.toString() !== _id);
+    }
+    await cart.save();
+    return res.status(200).json({ message: "Item quantity decreased", status: 200, cart });
+  } catch (error) {
+    return res
+      .status(400)
+      .json({ message: "error while updating the item quantity", error });
+  }
+};
+
 const emptyCart = async (req, res) => {
   const userId = req.user._id;
   console.log(userId);
@@ -94,4 +113,4 @@ const emptyCart = async (req, res) => {
   }
 };
 
-module.exports = { addToCart, getCartItems, deleteCartItem, emptyCart };
+module.exports = { addToCart, getCartItems, deleteCartItem, emptyCart, decreaseQuantity };

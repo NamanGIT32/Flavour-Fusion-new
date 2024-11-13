@@ -124,6 +124,7 @@ const Cart = () => {
                 </div>
               </div>
             </div>
+            
             {/* payment-options */}
             {visible && (
               <div

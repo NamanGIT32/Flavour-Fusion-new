@@ -2,6 +2,7 @@ import { GoTrash } from "react-icons/go";
 import { IMG_CDN_URL } from "../constants";
 import { useDispatch } from "react-redux";
 import { RemoveItem } from "../utils/Redux/CartSlice";
+import { CiSquarePlus, CiSquareMinus } from "react-icons/ci"
 import api from "../../axios";
 
 const CartItemsCard = ({ name, image, price, _id, description, fetchCart, itemId, quantity }) => {
@@ -44,7 +45,26 @@ const CartItemsCard = ({ name, image, price, _id, description, fetchCart, itemId
     );
     const data = res.data;
     console.log(data);
-    // fetchCart();
+    fetchCart();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const decreaseQuantity = async (itemId) => {
+    try {
+      const res= await api.post('/cart/decreasequantity',
+      {
+        _id: itemId
+      },
+      {
+        headers:{
+          Authorization:`Bearer ${token}`
+        }
+      }
+    );
+    const data = res.data;
+    console.log(data);
+    fetchCart();
     } catch (error) {
       console.log(error);
     }
@@ -62,7 +82,7 @@ const CartItemsCard = ({ name, image, price, _id, description, fetchCart, itemId
             <h2 className="text-xl font-bold whitespace-normal text-slate-600">
               {name}
             </h2>
-            <h3 className="text-right text-lg">{"₹" + price}</h3>
+            <h3 className="text-right text-lg">{"₹" + quantity*price}</h3>
           </div>
           <GoTrash
             className="text-2xl text-red-500"
@@ -71,12 +91,14 @@ const CartItemsCard = ({ name, image, price, _id, description, fetchCart, itemId
           {/* <GoTrash className="text-2xl text-red-500" onClick={()=>handleRemoveItem({_id})}/> */}
         </div>
       </div>
-      <div className="flex items-center gap-4">
-        <div className="cursor-pointer text-lg"
+      <div className="flex items-center text-3xl  mt-4">
+        <div className="cursor-pointer"
         onClick={()=> increaseQuantity(itemId)}
-        >+</div>
-        <div>{quantity}</div>
-        <div className="cursor-pointer text-lg">-</div>
+        ><CiSquarePlus /></div>
+        <div className="text-slate-600 text-2xl w-12 text-center">{quantity}</div>
+        <div className="cursor-pointer"
+        onClick={()=> decreaseQuantity(itemId)}
+        ><CiSquareMinus /></div>
       </div>
       <div className="mt-4 text-slate-600 text-lg">{description}</div>
     </div>

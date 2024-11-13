@@ -1,7 +1,8 @@
+import React, { useState } from "react";
 import { IMG_CDN_URL } from "../constants";
 import { Button } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
-import { addItem } from "../utils/Redux/CartSlice";
+import { addItem, RemoveItem } from "../utils/Redux/CartSlice";
 import api from "../../axios";
 import { handleError, handleSuccess } from "../utils/utils";
 import { ToastContainer } from "react-toastify";
@@ -19,9 +20,8 @@ const RestaurantMenuCard = ({
   const handleAddItem = (info) => {
     dispatch(addItem(info));
   };
-
+  const token = localStorage.getItem("jwtToken"); // Include token in request headers
   const addToCart = async (id, name, image, description, price) => {
-    const token = localStorage.getItem("jwtToken"); // Include token in request headers
     try {
       const res = await api.post(
         "/cart/add",
@@ -43,7 +43,25 @@ const RestaurantMenuCard = ({
         handleError(error.response.data.message);
     }
   };
-
+  const removeItem = async (_id) => {
+    try {
+      const res = await api.post(
+        "/cart/delete/",
+        {
+          _id: _id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(res.data);
+      handleSuccess(res.data.message);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="mt-5 flex justify-between items-center h-44 w-full relative border-b border-gray-300">
       <div className="w-[75%]">
